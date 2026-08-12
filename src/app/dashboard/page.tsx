@@ -10,7 +10,7 @@ export default async function Dashboard() {
   if (!user) redirect('/login')
  
   const { data: tasks } = await supabase
-    .from('tasks')
+    .from('tasks2')
     .select('*')
     .order('created_at', { ascending: false })
  
@@ -40,6 +40,10 @@ export default async function Dashboard() {
           name="description"
           placeholder="Description (optional)"
           className="w-full p-3 border rounded-lg"
+        />
+        <input
+        name="test_attribute"
+        className='w-full p-3 border rounded-lg'
         />
         <button
           type="submit"
@@ -75,6 +79,10 @@ export default async function Dashboard() {
                 {task.description && (
                   <p className="text-sm text-gray-500">{task.description}</p>
                 )}
+                  {task.test_attribute && (
+                  <p className="text-sm text-gray-500">{task.test_attribute}</p>
+                )}
+                {/* Conditional rendering. IF desc exists, then render.  */}
               </div>
             </div>
  

@@ -23,24 +23,26 @@ export default function LoginPage() {
       email,
       password,
     })
- 
+ //Using inputted email and password, try to log in to the database
     if (error) {
       setError(error.message)
       setLoading(false)
       return
     }
- 
+ //If it doesn't work, send an error
+
     router.push('/dashboard')
-  }
+  } // if login doesnt give error, route to dashboard
  
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleLogin} className="w-full max-w-md space-y-4 p-8">
+      <form onSubmit={handleLogin} className="w-full max-w-md space-y-4 p-8"> {/* once submitted, send the login request */}
         <h1 className="text-2xl font-bold">Log In</h1>
  
         {error && (
           <p className="text-red-500 text-sm">{error}</p>
         )}
+        {/* If there IS an error (conditional rendering), show it */}
  
         <input
           type="email"
@@ -49,7 +51,8 @@ export default function LoginPage() {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-3 border rounded-lg"
           required
-        />
+        /> 
+        {/* turn the input into a 'value' with onchange */}
  
         <input
           type="password"
