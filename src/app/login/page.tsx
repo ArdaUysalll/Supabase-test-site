@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Link from 'next/link'
+import FilestackUpload from '@/components/Upload'
  
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -62,6 +63,7 @@ export default function LoginPage() {
           className="w-full p-3 border rounded-lg"
           required
         />
+        <FilestackUpload/>
  
         <button
           type="submit"

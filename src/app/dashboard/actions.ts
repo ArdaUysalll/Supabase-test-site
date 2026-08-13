@@ -12,13 +12,13 @@ export async function addTask(formData: FormData) {
  
   const title = formData.get('title') as string
   const description = formData.get('description') as string
-  const test_attribute = formData.get('test_attribute') as string
+  const image = formData.get('image') as string
  
-  await supabase.from('tasks2').insert({
+  await supabase.from('tasks3').insert({
     title,
     description,
     user_id: user.id,
-    test_attribute,
+    image,
     
   }) // ADD the new task to the table
  
@@ -33,7 +33,7 @@ export async function toggleTask(taskId: string, completed: boolean) {
   const supabase = await createClient()
  
   await supabase
-    .from('tasks2')
+    .from('tasks3')
     .update({ completed: !completed })
     .eq('id', taskId)
  
@@ -44,7 +44,7 @@ export async function deleteTask(taskId: string) {
   const supabase = await createClient()
  
   await supabase
-    .from('tasks2')
+    .from('tasks3')
     .delete()
     .eq('id', taskId)
  

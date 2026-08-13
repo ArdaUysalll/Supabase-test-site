@@ -2,6 +2,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { addTask, toggleTask, deleteTask, signOut } from '@/app/dashboard/actions'
+import FilestackUpload from '@/components/Upload'
  
 export default async function Dashboard() {
   const supabase = await createClient()
@@ -10,7 +11,7 @@ export default async function Dashboard() {
   if (!user) redirect('/login')
  
   const { data: tasks } = await supabase
-    .from('tasks2')
+    .from('tasks3')
     .select('*')
     .order('created_at', { ascending: false })
  
@@ -40,15 +41,14 @@ export default async function Dashboard() {
           name="description"
           placeholder="Description (optional)"
           className="w-full p-3 border rounded-lg"
-        />
-        <input
-        name="test_attribute"
-        className='w-full p-3 border rounded-lg'
-        />
+        />    
+
+        
+        <FilestackUpload />
+
         <button
           type="submit"
-          className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
+          className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Add Task
         </button>
       </form>
@@ -79,10 +79,12 @@ export default async function Dashboard() {
                 {task.description && (
                   <p className="text-sm text-gray-500">{task.description}</p>
                 )}
-                  {task.test_attribute && (
-                  <p className="text-sm text-gray-500">{task.test_attribute}</p>
+                  
+                {task.image && (
+                  <div className="mt-2">
+                    <img src={task.image} alt="Uploaded Task Image" className="w-20 h-20 object-cover rounded-md" />
+                  </div>
                 )}
-                {/* Conditional rendering. IF desc exists, then render.  */}
               </div>
             </div>
  
